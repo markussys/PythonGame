@@ -28,6 +28,11 @@ class AlienInvasion:
             self._update_screen()
             self.clock.tick(60)
 
+            for bullet in self.bullets.copy():
+               if bullet.rect.bottom <= 0:
+                  self.bullets.remove(bullet)
+            print(len(self.bullets))
+
     def _update_bullets(self):
         self.bullets.update()
         for bullet in self.bullets.copy():
@@ -69,8 +74,23 @@ class AlienInvasion:
             self.ship.moving_left=False
 
     def _fire_bullet(self):
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets)< self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
+    
+    def update_bullets(self):
+        while True:
+            elf._check_events()
+            self.ship.update()
+            self._update_bullets()  # Update bullet positions
+            self._update_screen()
+            self.clock.tick(60)
+
+            for bullet in self.bullets.copy():
+                if bullet.rect <=0:
+                    self.bullets.remove(bullet)
+                print(len(self.bullets))
+
 
     
 
